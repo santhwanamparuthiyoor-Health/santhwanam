@@ -32,6 +32,7 @@ body::before{
   z-index:-1;
 }
 
+/* LOGIN */
 #loginBox{
   height:100vh;
   display:flex;
@@ -77,6 +78,7 @@ body::before{
   margin-top:10px;
 }
 
+/* APP */
 #app{
   display:none;
 }
@@ -171,7 +173,7 @@ th{
 
 <body>
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 <div id="loginBox">
   <div class="login-card">
     <h2>Santhwanam Login</h2>
@@ -182,7 +184,7 @@ th{
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- APP -->
 <div id="app">
   <div class="container">
 
@@ -256,10 +258,10 @@ function login(){
   }
 }
 
-// Your Web App URL
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyR6ougyEQFZu5kFvyjfqqrm-Dpz7vMWNE0Y00KgyJNnsYyhWz-axCa_V7EYykzAPNL/exec";
+/* ✅ PUT YOUR LATEST WEB APP URL HERE */
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrmkie6dTmYmzC9avO7oFOPZDpdPtlu72JHSWI8R7NCDOXEigRF5Etdu56ZbkBfadEug/exec";
 
-function saveData() {
+function saveData(){
   const data = {
     date: date.value,
     unit: unit.value,
@@ -278,27 +280,29 @@ function saveData() {
   };
 
   addRowToTable(data);
-  document.querySelectorAll("input, select, textarea").forEach(e => e.value = "");
 
-  fetch(WEB_APP_URL, {
-    method: "POST",
-    body: JSON.stringify(data)
+  document.querySelectorAll("input,select,textarea").forEach(e=>e.value="");
+
+  fetch(WEB_APP_URL,{
+    method:"POST",
+    body:JSON.stringify(data)
   })
-  .then(response => response.json())
-  .then(res => {
+  .then(r=>r.json())
+  .then(res=>{
     if(res.status==="success"){
       alert("Health data saved to spreadsheet!");
     }else{
       alert("Error saving data: "+res.message);
     }
   })
-  .catch(err => alert("Error connecting to spreadsheet: "+err));
+  .catch(err=>{
+    alert("Error connecting to spreadsheet: "+err);
+  });
 }
 
 function addRowToTable(data){
-  const tableBody = document.getElementById("tableBody");
-  const row = document.createElement("tr");
-  row.innerHTML = `
+  const row=document.createElement("tr");
+  row.innerHTML=`
     <td>${data.date}</td><td>${data.unit}</td><td>${data.name}</td>
     <td>${data.age}</td><td>${data.gender}</td><td>${data.bp}</td>
     <td>${data.sugar}</td><td>${data.height}</td><td>${data.weight}</td>
