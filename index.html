@@ -258,8 +258,9 @@ function login(){
   }
 }
 
-/* ✅ PUT YOUR LATEST WEB APP URL HERE */
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrmkie6dTmYmzC9avO7oFOPZDpdPtlu72JHSWI8R7NCDOXEigRF5Etdu56ZbkBfadEug/exec";
+/* ✅ YOUR FINAL WEB APP URL */
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbyYnfyXSwIp7gBIllhlltE1Enfiagh53Oi6vtLcH6E4ZsVBguFhhZJ8S1DNkIW8WPg/exec";
 
 function saveData(){
   const data = {
@@ -285,29 +286,30 @@ function saveData(){
 
   fetch(WEB_APP_URL,{
     method:"POST",
+    headers:{ "Content-Type":"application/json" },
     body:JSON.stringify(data)
   })
-  .then(r=>r.json())
-  .then(res=>{
-    if(res.status==="success"){
-      alert("Health data saved to spreadsheet!");
+  .then(res=>res.json())
+  .then(r=>{
+    if(r.status==="success"){
+      alert("Health data saved successfully");
     }else{
-      alert("Error saving data: "+res.message);
+      alert("Error: "+r.message);
     }
   })
-  .catch(err=>{
-    alert("Error connecting to spreadsheet: "+err);
+  .catch(()=>{
+    alert("Network error – check Web App access");
   });
 }
 
-function addRowToTable(data){
+function addRowToTable(d){
   const row=document.createElement("tr");
   row.innerHTML=`
-    <td>${data.date}</td><td>${data.unit}</td><td>${data.name}</td>
-    <td>${data.age}</td><td>${data.gender}</td><td>${data.bp}</td>
-    <td>${data.sugar}</td><td>${data.height}</td><td>${data.weight}</td>
-    <td>${data.blood}</td><td>${data.phone}</td><td>${data.address}</td>
-    <td>${data.disease}</td><td>${data.medicine}</td>
+    <td>${d.date}</td><td>${d.unit}</td><td>${d.name}</td>
+    <td>${d.age}</td><td>${d.gender}</td><td>${d.bp}</td>
+    <td>${d.sugar}</td><td>${d.height}</td><td>${d.weight}</td>
+    <td>${d.blood}</td><td>${d.phone}</td><td>${d.address}</td>
+    <td>${d.disease}</td><td>${d.medicine}</td>
   `;
   tableBody.prepend(row);
 }
