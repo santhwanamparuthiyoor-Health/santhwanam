@@ -258,25 +258,25 @@ function login(){
   }
 }
 
-/* ✅ LATEST WEB APP URL */
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbypLEya6JZIdfBINeDMdH0WCwK6cEGRR5FYgzTTN0yoo8XhnjL6MIMyjkI0x0AKW68Zxg/exec";
+/* ✅ Latest Web App URL */
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby8hcpQ5w3LwKsl0NCi2GlQ2NlGWzmJC_ai_DU-z2ZA5OOy3i0iXKKdV3Rs9-1aD31KXQ/exec";
 
 function saveData(){
   const data = {
-    date: date.value,
-    unit: unit.value,
-    name: name.value,
-    age: age.value,
-    gender: gender.value,
-    bp: bp.value,
-    sugar: sugar.value,
-    height: height.value,
-    weight: weight.value,
-    blood: blood.value,
-    phone: phone.value,
-    address: address.value,
-    disease: disease.value,
-    medicine: medicine.value
+    date: document.getElementById("date").value,
+    unit: document.getElementById("unit").value,
+    name: document.getElementById("name").value,
+    age: document.getElementById("age").value,
+    gender: document.getElementById("gender").value,
+    bp: document.getElementById("bp").value,
+    sugar: document.getElementById("sugar").value,
+    height: document.getElementById("height").value,
+    weight: document.getElementById("weight").value,
+    blood: document.getElementById("blood").value,
+    phone: document.getElementById("phone").value,
+    address: document.getElementById("address").value,
+    disease: document.getElementById("disease").value,
+    medicine: document.getElementById("medicine").value
   };
 
   addRowToTable(data);
