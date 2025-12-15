@@ -195,9 +195,9 @@ th{
 
     <div class="form-grid">
       <div class="form-group"><label>Date</label><input id="date" type="date"></div>
-      <div class="form-group"><label>Unit No</label><input id="unit"></div>
-      <div class="form-group"><label>Name</label><input id="name"></div>
-      <div class="form-group"><label>Age</label><input id="age"></div>
+      <div class="form-group"><label>Unit No</label><input id="unit" type="text"></div>
+      <div class="form-group"><label>Name</label><input id="name" type="text"></div>
+      <div class="form-group"><label>Age</label><input id="age" type="number"></div>
 
       <div class="form-group">
         <label>Gender</label>
@@ -208,10 +208,10 @@ th{
         </select>
       </div>
 
-      <div class="form-group"><label>Blood Pressure</label><input id="bp"></div>
-      <div class="form-group"><label>Sugar</label><input id="sugar"></div>
-      <div class="form-group"><label>Height (cm)</label><input id="height"></div>
-      <div class="form-group"><label>Weight (kg)</label><input id="weight"></div>
+      <div class="form-group"><label>Blood Pressure</label><input id="bp" type="text"></div>
+      <div class="form-group"><label>Sugar</label><input id="sugar" type="text"></div>
+      <div class="form-group"><label>Height (cm)</label><input id="height" type="text"></div>
+      <div class="form-group"><label>Weight (kg)</label><input id="weight" type="text"></div>
 
       <div class="form-group">
         <label>Blood Group</label>
@@ -224,7 +224,7 @@ th{
         </select>
       </div>
 
-      <div class="form-group"><label>Phone</label><input id="phone"></div>
+      <div class="form-group"><label>Phone</label><input id="phone" type="text"></div>
       <div class="form-group"><label>Address</label><textarea id="address"></textarea></div>
       <div class="form-group"><label>Other Disease</label><textarea id="disease"></textarea></div>
       <div class="form-group"><label>Medicine Intake</label><textarea id="medicine"></textarea></div>
@@ -253,13 +253,13 @@ function login(){
   if(loginUser.value==="santhwanam" && loginPass.value==="care123"){
     loginBox.style.display="none";
     app.style.display="block";
-  }else{
+  } else {
     error.innerText="Invalid username or password";
   }
 }
 
 /* ✅ Latest Web App URL */
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby8hcpQ5w3LwKsl0NCi2GlQ2NlGWzmJC_ai_DU-z2ZA5OOy3i0iXKKdV3Rs9-1aD31KXQ/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbypLEya6JZIdfBINeDMdH0WCwK6cEGRR5FYgzTTN0yoo8XhnjL6MIMyjkI0x0AKW68Zxg/exec";
 
 function saveData(){
   const data = {
@@ -281,28 +281,29 @@ function saveData(){
 
   addRowToTable(data);
 
-  document.querySelectorAll("input,select,textarea").forEach(e=>e.value="");
+  // Clear form
+  document.querySelectorAll("input,select,textarea").forEach(e => e.value="");
 
-  fetch(WEB_APP_URL,{
-    method:"POST",
-    body:JSON.stringify(data)
+  fetch(WEB_APP_URL, {
+    method: "POST",
+    body: JSON.stringify(data)
   })
-  .then(r=>r.json())
-  .then(res=>{
+  .then(r => r.json())
+  .then(res => {
     if(res.status==="success"){
       alert("Health data saved to spreadsheet!");
-    }else{
+    } else {
       alert("Error saving data: "+res.message);
     }
   })
-  .catch(err=>{
+  .catch(err => {
     alert("Error connecting to spreadsheet: "+err);
   });
 }
 
 function addRowToTable(data){
-  const tableBody=document.getElementById("tableBody");
-  const row=document.createElement("tr");
+  const tableBody = document.getElementById("tableBody");
+  const row = document.createElement("tr");
   row.innerHTML=`
     <td>${data.date}</td><td>${data.unit}</td><td>${data.name}</td>
     <td>${data.age}</td><td>${data.gender}</td><td>${data.bp}</td>
