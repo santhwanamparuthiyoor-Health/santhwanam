@@ -258,26 +258,26 @@ function login(){
   }
 }
 
-/* ✅ YOUR FINAL WEB APP URL */
+/* ✅ UPDATED WEB APP URL */
 const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbyYnfyXSwIp7gBIllhlltE1Enfiagh53Oi6vtLcH6E4ZsVBguFhhZJ8S1DNkIW8WPg/exec";
+"https://script.google.com/macros/s/AKfycby602_JhBgCxZYyW2mzUOvAKwaqK22dWBovuovBw5W1ks-Qy81wbqIQPxOWzQXi41D7/exec";
 
 function saveData(){
-  const data = {
-    date: date.value,
-    unit: unit.value,
-    name: name.value,
-    age: age.value,
-    gender: gender.value,
-    bp: bp.value,
-    sugar: sugar.value,
-    height: height.value,
-    weight: weight.value,
-    blood: blood.value,
-    phone: phone.value,
-    address: address.value,
-    disease: disease.value,
-    medicine: medicine.value
+  const data={
+    date:date.value,
+    unit:unit.value,
+    name:name.value,
+    age:age.value,
+    gender:gender.value,
+    bp:bp.value,
+    sugar:sugar.value,
+    height:height.value,
+    weight:weight.value,
+    blood:blood.value,
+    phone:phone.value,
+    address:address.value,
+    disease:disease.value,
+    medicine:medicine.value
   };
 
   addRowToTable(data);
@@ -286,15 +286,14 @@ function saveData(){
 
   fetch(WEB_APP_URL,{
     method:"POST",
-    headers:{ "Content-Type":"application/json" },
     body:JSON.stringify(data)
   })
-  .then(res=>res.json())
-  .then(r=>{
-    if(r.status==="success"){
-      alert("Health data saved successfully");
+  .then(r=>r.json())
+  .then(res=>{
+    if(res.status==="success"){
+      alert("Health data saved to spreadsheet!");
     }else{
-      alert("Error: "+r.message);
+      alert("Error saving data: "+res.message);
     }
   })
   .catch(()=>{
@@ -302,14 +301,14 @@ function saveData(){
   });
 }
 
-function addRowToTable(d){
+function addRowToTable(data){
   const row=document.createElement("tr");
   row.innerHTML=`
-    <td>${d.date}</td><td>${d.unit}</td><td>${d.name}</td>
-    <td>${d.age}</td><td>${d.gender}</td><td>${d.bp}</td>
-    <td>${d.sugar}</td><td>${d.height}</td><td>${d.weight}</td>
-    <td>${d.blood}</td><td>${d.phone}</td><td>${d.address}</td>
-    <td>${d.disease}</td><td>${d.medicine}</td>
+    <td>${data.date}</td><td>${data.unit}</td><td>${data.name}</td>
+    <td>${data.age}</td><td>${data.gender}</td><td>${data.bp}</td>
+    <td>${data.sugar}</td><td>${data.height}</td><td>${data.weight}</td>
+    <td>${data.blood}</td><td>${data.phone}</td><td>${data.address}</td>
+    <td>${data.disease}</td><td>${data.medicine}</td>
   `;
   tableBody.prepend(row);
 }
